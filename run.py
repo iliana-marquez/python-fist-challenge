@@ -25,10 +25,9 @@ def get_sales_data():
     while True:
         print("Please enter sales data from the last market.")
         print("Data should be six numbers, separated by commas.")
-        print("Example: 10,20,30,40,50,60\n")
-
+        print("Example: 10,20,30,40,50,60\n") # \n adds an empty line afterwards
         data_str = input("Enter your data here: ")
-        # print(f"The data provided is {data_str}") only used to check if the data given was taken correctly
+        # print(f"The data provided is {data_str}") #only used to check if the data given was taken correctly
 
         sales_data = data_str.split(",")
 
@@ -60,7 +59,7 @@ def update_sales_worksheet(data):
     """
     Update sales worksheet, add new row with the list data provided
     """
-    print("Updating sales worksheet...\n")
+    print("Updating sales worksheet...\n") #gives user feedback of process
     sales_worksheet = SHEET.worksheet('sales')
     sales_worksheet.append_row(data)
     print("Sales worksheet updated succesfuly.\n")
@@ -75,18 +74,28 @@ def calculate_surplus_data(sales_row):
     """
     print("Calculating surplus data...\n")
     stock = SHEET.worksheet("stock").get_all_values()  ####to fetch the values from the sheet#
-    stock_row = stock[-1] #slice the final item of the list
-    pprint(stock_row)
+    stock_row = stock[-1] ###slice the final item of the list
+    # print(f"stock_row: {stock_row}")
+    # print(f"sales_row: {sales_row}")
+
+    surplus_data = []
+    for stock, sales in zip(stock_row, sales_row):
+        surplus = int(stock) - int(sales)
+        surplus_data.append(surplus)
+    # print(surplus_data) #remember: print is only to check and debug *** but return will give you the output of the function
+
+    return surplus_data
 
 
 def main():
     """
-    Run all program functions
+    Run all program functions 
     """
     data = get_sales_data()
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
-    calculate_surplus_data(sales_data)
+    new_surplus_data = calculate_surplus_data(sales_data)
+    print(new_surplus_data)
 
-print("Welcome to love sandwiches data automation")
+print("Welcome to Love Sandwiches Data Automation")
 main()
