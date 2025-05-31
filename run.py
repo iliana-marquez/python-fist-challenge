@@ -108,6 +108,18 @@ def calculate_stock_data(data):
     return new_stock_data
 
 
+def get_stock_values(data):
+    """
+    Get the stock data of the last row to
+    print it in the terminal as stock suggestion for the next market
+    """
+    stock = SHEET.worksheet("stock").get_all_values()
+    headings = stock[0]
+    stock_dict = {heading: data[i] for i, heading in enumerate(headings)}
+    message = "Make the following number of sandwiches for the next market:\n"
+    return (f"{message}/n{stock_dict}")
+
+
 def main():
     """
     Run all program functions
@@ -120,6 +132,7 @@ def main():
     sales_columns = get_last_5_entry_sales()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
+    get_stock_values(stock_data)
 
 
 print("Welcome to Love Sandwiches Data Automation")
