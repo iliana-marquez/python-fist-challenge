@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+# from pprint import pprint # for working localy, wont be needed in deployed project
 
 
 SCOPE = [
@@ -26,7 +26,7 @@ def get_sales_data():
         print("Please enter sales data from the last market.")
         print("Data should be six numbers, separated by commas.")
         print("Example: 10,20,30,40,50,60\n") # \n adds an empty line afterwards
-        data_str = input("Enter your data here: ")
+        data_str = input("Enter your data here:\n") # \n need this to show the entered data everytime using input in terminal
         # print(f"The data provided is {data_str}") #only used to check if the data given was taken correctly
 
         sales_data = data_str.split(",")
