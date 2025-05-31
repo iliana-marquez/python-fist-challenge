@@ -4,3 +4,4 @@ __pycache__/
 .env
 env.py
 creds.json
+practice_run.py
