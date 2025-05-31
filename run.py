@@ -117,7 +117,7 @@ def get_stock_values(data):
     headings = stock[0]
     stock_dict = {heading: data[i] for i, heading in enumerate(headings)}
     message = "Make the following number of sandwiches for the next market:\n"
-    return (f"{message}/n{stock_dict}")
+    print(f"{message}{stock_dict}")
 
 
 def main():
